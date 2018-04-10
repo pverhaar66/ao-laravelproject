@@ -23,6 +23,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home/{catid}', 'HomeController@sort')->name('sort');
+Route::get('/home/category/{catid}', 'HomeController@sort')->name('sort');
 
 Route::get('/home/shoppingcart', 'ShoppingcartController@index')->name('cart');

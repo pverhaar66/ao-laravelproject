@@ -23,13 +23,20 @@ class HomeController extends Controller {
 	 */
 	public function index() {
 		$articles = DB::table('articles')->get();
-		return view('home', ['article' => $articles]);
+		
+		$categories = DB::table('categories')->get();
+		
+		return view('home', ['articles' => $articles], ['categories' =>  $categories]);
 	}
 
 	public function sort($catid) {
-		$articleID = DB::table("linked_articles_categories")->where("category_id", $catid)->value("article_id");
-		$sortedArticle = DB::table("articles")->where("article_id", $articleID)->get();
-		return view('home', ['article' => $sortedArticle]);
+		$categories = DB::table('categories')->get();
+		$articleIDs = DB::table("linked_articles_categories")->select("article_id")->where("category_id", $catid)->get();
+		foreach($articleIDs as $articleID){
+		$articles[] = DB::table("articles")->where("article_id", $articleID->article_id)->get();
+		}
+		
+		return view('home', ['articles' => $articles], ['categories' =>  $categories]);
 	}
 
 }

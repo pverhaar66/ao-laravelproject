@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/routes/web.php</file>
+            <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/Controllers/ShoppingcartController.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/Controllers/HomeController.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/resources/views/home.blade.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/resources/views/welcome.blade.php</file>

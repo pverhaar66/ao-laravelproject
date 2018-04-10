@@ -1,32 +1,22 @@
 @extends('layouts.app')
+@extends('layouts.sidemenu')
 
 @section('content')
 
-<section id='mainsquare'>
+<section id='mainsquare'>	
 	<pre>	
 	@if  (is_array($articles))
 
-	@foreach($articles as $articles)
-	{!!$articles!!}
+	@foreach($articles as $article)	
+	{!!$article!!}
+	<a href="{{$shoppingcart->addToCart($article)}}">Add to shopping cart</a>
 	@endforeach
 
 	@else
-
 	{!!$articles!!}
-
-	@endif
-	</pre>
-	<a>Add to shopping cart</a>
+	<a href="{{$shoppingcart->addToCart($articles)}}">Add to shopping cart</a>				
+	</pre>	
+	@endif		
 </section>
-
-<section id='sidebar'>
-	
-	<a href="{{url('/home/shoppingcart')  }}" >View Shopping Cart</a>
-	
-	<h2>Categoriën</h2>
-	<a href="{{url('/home/')  }}" >Home</a>
-	@foreach($categories  as $category)
-		<a href="{{ url('/home/category/' .  $category->category_id) }}">{{$category->category_name}}</a>
-	@endforeach
-</section>
+		
 @endsection

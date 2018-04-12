@@ -9,14 +9,13 @@
 
 	@foreach($articles as $article)	
 	{!!$article!!}
-	<a href="{{$shoppingcart->addToCart($article)}}">Add to shopping cart</a>
+	<button id="addToCart"><a href="{{ url('/shoppingcart/add/' .  $article[0]->article_id) }}">Add to shopping cart</a></button>
 	@endforeach
 
 	@else
 	{!!$articles!!}
-	<a href="{{$shoppingcart->addToCart($articles)}}">Add to shopping cart</a>				
 	</pre>	
 	@endif		
 </section>
-		
+    <script type="text/javascript" src="{{ URL::asset('js/webshop.js') }}"></script>		
 @endsection

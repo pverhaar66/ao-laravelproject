@@ -7,5 +7,15 @@
 	</section>
 	<h1>Shoppingcart</h1>
 
+	@if($shoppingcart !== null)
+	
+	@foreach($shoppingcart as $item)
+	<p>{!!$item!!}</p>
+	@endforeach
+	
+	@else
+	<p>The cart is EMPTY</p>
+	@endif
+
 </section>
 @endsection

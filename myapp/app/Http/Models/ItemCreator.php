@@ -15,7 +15,7 @@ namespace App\Http\Models;
  */
 class ItemCreator {
 	
-	private $_id;
+	private $_product;
 	private $_amount;
 	
 	/**
@@ -23,8 +23,20 @@ class ItemCreator {
 	 * @param type $id
 	 * @param type $amount
 	 */
-	public function construct($id, $amount){
-		$this->_id = $id;
+	public function __construct($product, $amount){
+		$this->_product = $product;
 		$this->_amount = $amount;
+	}
+	
+	public function getProduct() {
+		return $this->_product;
+	}
+
+	public function getAmount() {
+		return $this->_amount;
+	}
+	
+	public function getProductOnPosition($pos){
+		return $this->_product[$pos];
 	}
 }

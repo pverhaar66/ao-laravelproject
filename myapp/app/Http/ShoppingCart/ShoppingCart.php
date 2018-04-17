@@ -14,8 +14,8 @@ namespace App\Http\ShoppingCart;
  * @author peter
  */
 class ShoppingCart {
-	const SHOPPINGCART = 'shoppingcart';
 
+	const SHOPPINGCART = 'shoppingcart';
 	/**
 	 * adds the product to items array and the items array to the shoppingcart session
 	 * @param type $request
@@ -26,9 +26,9 @@ class ShoppingCart {
 		$request->session()->push(self::SHOPPINGCART, $product);
 		return self::SHOPPINGCART;
 	}
-	
-	function removeFromCart($request){
-		
+
+	function removeAllItemsFromCart($request) {
+		$request->session()->flush();
 	}
 
 }

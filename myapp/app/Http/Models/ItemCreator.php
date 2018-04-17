@@ -39,4 +39,8 @@ class ItemCreator {
 	public function getProductOnPosition($pos){
 		return $this->_product[$pos];
 	}
+	
+	public function setAmount($amount){
+		$this->_amount = $amount;
+	}
 }

@@ -10,7 +10,7 @@
 	@if($shoppingcart !== null)
 	
 	@foreach($shoppingcart as $item)
-	<p>{!!$item->getProductOnPosition(0)->article_name!!}</p>  <input type="number" value="{!!$item->getAmount()!!}" name="amount"></input>  <p>{!!$item->getProductOnPosition(0)->article_price!!}</p>
+	<p>{!!$item->getProductOnPosition(0)->article_name!!}</p>  <input type="number" value="{!!$item->getAmount()!!}" name="amount"></input>  <p>€{!!$item->getProductOnPosition(0)->article_price!!}.00</p>
 	@endforeach
 	
 	@else

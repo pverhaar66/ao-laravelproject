@@ -27,8 +27,4 @@ class ShoppingCart {
 		return self::SHOPPINGCART;
 	}
 
-	function removeAllItemsFromCart($request) {
-		$request->session()->flush();
-	}
-
 }

@@ -25,3 +25,4 @@ Route::get('/home/{catid}', 'HomeController@index')->name('home');
 
 Route::get('/shoppingcart', 'ShoppingcartController@index')->name('shoppingcart');
 Route::get('/shoppingcart/add/{articleid}', 'ShoppingcartController@addToCart')->name('addtocart');
+Route::get('/shoppingcart/delete/{articleid}', 'ShoppingcartController@deleteItem')->name('deleteItem');

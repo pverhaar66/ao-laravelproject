@@ -35,6 +35,21 @@ class ShoppingcartController extends Controller {
 		return back();
 	}
 
+	public function deleteItem(Request $request, $itemid) {
+		$shoppingcart = $request->session()->get("shoppingcart");
+		echo"<pre>";
+		var_dump($shoppingcart);
+		exit();
+		for ($i = 0; $i < count($shoppingcart); $i++) {
+			$checkedid = $shoppingcart[$i]->getProductOnPosition(0)->article_id;
+			if ($checkedid == $itemid) {
+				unset($shoppingcart[$i]);
+				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
+			}
+		}
+		return back();
+	}
+
 	/**
 	 * checks the content of the session for duplicates and deletes the duplicates and adds the amount to the other to the amount of destroyed duplicates
 	 * @param type $request
@@ -43,19 +58,22 @@ class ShoppingcartController extends Controller {
 	public function checkForDuplicates($request) {
 		$shoppingcart = $request->session()->get("shoppingcart");
 		if (count($shoppingcart) > 1) {
-
-			$articleID1 = $shoppingcart[0]->getProductOnPosition(0)->article_id;
-			$articleID2 = $shoppingcart[1]->getProductOnPosition(0)->article_id;
-			if ($articleID1 === $articleID2) {
-				//
-				$amount = $shoppingcart[0]->getAmount();
-				$amount ++;
-				$shoppingcart[0]->setAmount($amount);
-				unset($shoppingcart[1]);
-				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
-			} else {
-				return $shoppingcart;
+			for ($i = 0; $i < count($shoppingcart); $i++) {
+				$articleID1 = $shoppingcart[$i]->getProductOnPosition(0)->article_id;
+				for ($y = 1; $y < count($shoppingcart); $y++) {
+					$articleID2 = $shoppingcart[$y]->getProductOnPosition(0)->article_id;
+					if ($i !== $y) {
+						if ($articleID1 === $articleID2) {
+							$amount = $shoppingcart[$i]->getAmount();
+							$amount ++;
+							$shoppingcart[$i]->setAmount($amount);
+							array_splice($shoppingcart, $y, $y);
+							$request->session()->put(self::SHOPPINGCART, $shoppingcart);
+						}
+					}
+				}
 			}
+			return $shoppingcart;
 		}
 	}
 

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home/{catid}', 'HomeController@index')->name('home');
+Route::get('/home/article/{articleID}', 'ArticleController@index')->name('article');
 
 Route::get('/shoppingcart', 'ShoppingcartController@index')->name('shoppingcart');
 Route::get('/shoppingcart/add/{articleid}', 'ShoppingcartController@addToCart')->name('addtocart');

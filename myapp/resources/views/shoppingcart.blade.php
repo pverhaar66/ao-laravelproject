@@ -17,6 +17,9 @@
 	@else
 	<p>The cart is EMPTY</p>
 	@endif
+	
+	
+	<p> Total Price : 
 
 </section>
 @endsection

@@ -35,15 +35,18 @@ class ShoppingcartController extends Controller {
 		return back();
 	}
 
+	/**
+	 * removes the product from the shoppincart session array
+	 * @param Request $request
+	 * @param type $itemid
+	 * @return type page
+	 */
 	public function deleteItem(Request $request, $itemid) {
 		$shoppingcart = $request->session()->get("shoppingcart");
-		echo"<pre>";
-		var_dump($shoppingcart);
-		exit();
 		for ($i = 0; $i < count($shoppingcart); $i++) {
-			$checkedid = $shoppingcart[$i]->getProductOnPosition(0)->article_id;
-			if ($checkedid == $itemid) {
-				unset($shoppingcart[$i]);
+			$articleID = $shoppingcart[$i]->getProductOnPosition(0)->article_id;
+			if ($articleID == $itemid) {
+				array_splice($shoppingcart, $i, $i);
 				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
 			}
 		}
@@ -73,7 +76,6 @@ class ShoppingcartController extends Controller {
 					}
 				}
 			}
-			return $shoppingcart;
 		}
 	}
 

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Models\ItemCreator;
 use App\Http\ShoppingCart\ShoppingCart;
-use Illuminate\Support\Facades\DB;
 
 class ShoppingcartController extends Controller {
 
@@ -18,8 +18,21 @@ class ShoppingcartController extends Controller {
 	 */
 	public function index(Request $request) {
 		$this->checkForDuplicates($request);
+		$total = $this->calcTotalPrice($request);
 		$shoppingcart = $request->session()->get("shoppingcart");
-		return view('shoppingcart', ['shoppingcart' => $shoppingcart]);
+		return view('shoppingcart', ['shoppingcart' => $shoppingcart, 'total' => $total]);
+	}
+
+	public function calcTotalPrice(Request $request) {
+		$totalprice ='';
+		$shoppingcart = $request->session()->get("shoppingcart");
+		foreach ($shoppingcart as $product) {
+			$price = $product->getProductOnPosition(0)->article_price;
+			$amount = $product->getAmount();
+			$productsprice = $amount * $price;
+			$totalprice = ++$productsprice;
+		}
+		return $totalprice;
 	}
 
 	/**
@@ -46,7 +59,11 @@ class ShoppingcartController extends Controller {
 		for ($i = 0; $i < count($shoppingcart); $i++) {
 			$articleID = $shoppingcart[$i]->getProductOnPosition(0)->article_id;
 			if ($articleID == $itemid) {
-				array_splice($shoppingcart, $i, $i);
+				if (count($shoppingcart) === 1) {
+					$shoppingcart = [];
+				} else {
+					array_splice($shoppingcart, $i, $i);
+				}
 				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
 			}
 		}

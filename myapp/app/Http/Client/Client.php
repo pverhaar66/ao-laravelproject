@@ -5,18 +5,12 @@ namespace App\Http\Client;
 /**
  * Description of Client
  *
- * @author peter
+ * @author Peter Verhaar
  */
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \Illuminate\Database\Eloquent\Model;
 
-class Client {
-
-	public function checkDatabaseForClient() {
-		$userID = DB::table('users')->select("id")->where("id", auth()->user()->id)->first();
-		$clientID = DB::table('clients')->select("client_id")->where("user_id", $userID->id)->first();
-		
-		return $clientID;
-	}
-
+class Client extends Model {
+	
 }

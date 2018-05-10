@@ -24,7 +24,7 @@ class HomeController extends Controller {
 	public function index($catid = null) {
 		$categories = DB::table('categories')->get();
 		if ($catid === null) {
-			$articles = DB::table('articles')->get();
+			$articles = "Welcome To My Shop";
 		} else {
 			$articleIDs = DB::table("linked_articles_categories")->select("article_id")->where("category_id", $catid)->get();
 			foreach ($articleIDs as $articleID) {

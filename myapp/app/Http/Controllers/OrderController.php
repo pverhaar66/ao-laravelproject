@@ -3,17 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Order\Order;
-
+use App\Http\Order\OrderDetail;
+use App\Http\Article\Article;
 class OrderController extends Controller {
+
+	public function index(){
+		$orders = Order::where('client_id', auth()->user()->id)->get();
+		$orderdetails = OrderDetail::get();
+		$articles = Article::get();
 	
-	public function index(Request $request) {
+		return view("orderlist", ["orderdetails"=>$orderdetails, "orders"=>$orders, "articles" => $articles]);
+	}
+	
+	public function confirmation(Request $request) {
+		$this->save($request);
+		return view('order');
+	}
+
+	public function save($request) {
 		$order = new Order();
-		$order->adOrderToDatabase($request);
-		$orderlist = $shoppingcart = $request->session()->get("shoppingcart");
+		$order->client_id = auth()->user()->id;
+		$order->save();
+		$shoppingcart = $request->session()->get("shoppingcart");
+		foreach ($shoppingcart as $item) {
+			$order->orderdetails()->create([
+			    "article_id" => $item->getProductOnPosition(0)->article_id,
+			    "amount" => $item->getAmount()
+			]);
+		}
 		
-		return view('order', ['orderlist'=>$orderlist]);
 	}
 
 }

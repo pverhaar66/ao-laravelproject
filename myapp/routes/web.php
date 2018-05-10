@@ -28,4 +28,5 @@ Route::get('/shoppingcart', 'ShoppingcartController@index')->name('shoppingcart'
 Route::get('/shoppingcart/add/{articleid}', 'ShoppingcartController@addToCart')->name('addtocart');
 Route::get('/shoppingcart/delete/{articleid}', 'ShoppingcartController@deleteItem')->name('deleteItem');
 
-Route::get('/order/', 'OrderController@index')->name('order');
+Route::get('/order/confirmation', 'OrderController@confirmation')->name('order');
+Route::get('/order/index', 'OrderController@index')->name('orderindex');

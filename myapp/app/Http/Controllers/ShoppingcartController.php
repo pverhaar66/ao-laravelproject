@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Models\ItemCreator;
+use App\Http\ItemCreator;
 use App\Http\ShoppingCart\ShoppingCart;
 
 class ShoppingcartController extends Controller {
@@ -26,6 +26,9 @@ class ShoppingcartController extends Controller {
 	public function calcTotalPrice(Request $request) {
 		$totalprice ='';
 		$shoppingcart = $request->session()->get("shoppingcart");
+		if ($shoppingcart === null) {
+			return 0;
+		}
 		foreach ($shoppingcart as $product) {
 			$price = $product->getProductOnPosition(0)->article_price;
 			$amount = $product->getAmount();

@@ -7,12 +7,11 @@
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/ShoppingCart/ShoppingCart.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/Controllers/ShoppingcartController.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/resources/views/order.blade.php</file>
-            <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/Controllers/ClientController.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/Controllers/OrderController.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/Controllers/HomeController.php</file>
-            <file>file:/C:/xampp/htdocs/LaravelProject/myapp/resources/views/client.blade.php</file>
-            <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/Client/Client.php</file>
+            <file>file:/C:/xampp/htdocs/LaravelProject/myapp/resources/views/orderlist.blade.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/resources/views/home.blade.php</file>
+            <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/order/OrderDetail.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/resources/views/shoppingcart.blade.php</file>
             <file>file:/C:/xampp/htdocs/LaravelProject/myapp/app/Http/order/Order.php</file>
         </group>

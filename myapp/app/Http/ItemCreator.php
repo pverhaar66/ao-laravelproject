@@ -6,14 +6,14 @@
  * and open the template in the editor.
  */
 
-namespace App\Http\Models;
+namespace App\Http;
 
 /**
  * Description of ItemCreatorModel, Creates the items
  *
  * @author peter
  */
-class ItemCreator {
+class ItemCreator extends \Illuminate\Database\Eloquent\Model{
 	
 	private $_product;
 	private $_amount;

@@ -1,0 +1,14 @@
+body{
+	font-family: Yu Gothic UI;
+	background-color: aliceblue;
+}
+
+#sidemenu{
+	width: 100px;
+	border: #004085 2px double;
+}
+
+#orderlist{
+	border: #004085 2px solid;
+	padding: 5px;
+}

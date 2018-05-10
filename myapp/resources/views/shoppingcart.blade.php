@@ -12,7 +12,7 @@
 	<button id="removeItem" class="btn btn-default alert"><a href="{{url('/shoppingcart/delete/'. $item->getProductOnPosition(0)->article_id)  }}">Remove Item</a></button>
 	@endforeach
 	<p> Total Price : {!!$total!!}
-	<button><a href="{{url('/order/')}}">Order</a></button>
+	<button><a href="{{url('/order/confirmation')}}">Order</a></button>
 	@else
 	<p>The cart is EMPTY</p>
 	@endif

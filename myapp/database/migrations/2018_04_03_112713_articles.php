@@ -14,7 +14,6 @@ class Articles extends Migration {
 	public function up() {
 		Schema::create('articles', function (Blueprint $table) {
 			$table->increments('article_id');
-			$table->integer('article_nr');
 			$table->integer('article_price');
 			$table->string('article_name');
 			$table->string('article_description');

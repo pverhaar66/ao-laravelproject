@@ -3,6 +3,7 @@
 <section id='sidebar'>
 
 	<a href="{{url('/shoppingcart/')  }}" >View Shopping Cart</a>
+	<a href="{{url('/order/index')  }}"> view  orders</a>
 
 	<h2>Categoriën</h2>
 	<a href="{{url('/home/')  }}" >Home</a>

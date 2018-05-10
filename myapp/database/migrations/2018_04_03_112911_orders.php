@@ -15,7 +15,6 @@ class Orders extends Migration {
 		Schema::create('orders', function (Blueprint $table) {
 			$table->increments('order_id');
 			$table->integer('client_id');
-			$table->date('date');
 			$table->timestamps();
 		});
 	}

@@ -12,3 +12,7 @@ body{
 	border: #004085 2px solid;
 	padding: 5px;
 }
+
+.productBox{
+	border: #004085 2px double;
+}

@@ -27,6 +27,8 @@ Route::get('/home/article/{articleID}', 'ArticleController@index')->name('articl
 Route::get('/shoppingcart', 'ShoppingcartController@index')->name('shoppingcart');
 Route::get('/shoppingcart/add/{articleid}', 'ShoppingcartController@addToCart')->name('addtocart');
 Route::get('/shoppingcart/delete/{articleid}', 'ShoppingcartController@deleteItem')->name('deleteItem');
+Route::get('/shoppingcart/deletecart', 'ShoppingcartController@removeAll')->name('removeAll');
+Route::get('/shoppingcart/update/{articleid}', 'ShoppingcartController@updateItem')->name('UpdateItem');
 
 Route::get('/order/confirmation', 'OrderController@confirmation')->name('order');
 Route::get('/order/index', 'OrderController@index')->name('orderindex');

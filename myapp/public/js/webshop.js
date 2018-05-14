@@ -2,8 +2,7 @@ var addToCartButton = document.getElementById('addToCart');
 var amount = document.getElementById('amount');
 var price = document.getElementById('price');
 
-
-addToCartButton.setAttribute("onClick", "showAlert('added to cart', 1000)");
+addToCartButton.setAttribute("onClick", "showAlert('added to cart', 2000)");
 function showAlert(msg, duration) {
 
 	var el = document.createElement("div");
@@ -15,7 +14,9 @@ function showAlert(msg, duration) {
 	document.body.appendChild(el);
 }
 
-function calcTotal(){
-	var total = amount * price;
-	return total;
+function currentAmountValue(){
+	return amount.value();
 }
+
+
+

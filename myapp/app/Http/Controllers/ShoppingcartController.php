@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * Description of ShoppingCart
+ *
+ * @author Peter Verhaar
+ */
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\ItemCreator;
@@ -12,30 +17,16 @@ class ShoppingcartController extends Controller {
 	const SHOPPINGCART = 'shoppingcart';
 
 	/**
-	 * renders the shoppingcart view with shoppingcart data
+	 * renders the shopping cart view with shopping cart data
 	 * @param Request $request
 	 * @return type view
 	 */
 	public function index(Request $request) {
-		$this->checkForDuplicates($request);
-		$total = $this->calcTotalPrice($request);
+		$shoppinCartModel = new ShoppingCart();
+		$shoppinCartModel->checkForDuplicates($request);
+		$total = $shoppinCartModel->calcTotalPrice($request);
 		$shoppingcart = $request->session()->get("shoppingcart");
 		return view('shoppingcart', ['shoppingcart' => $shoppingcart, 'total' => $total]);
-	}
-
-	public function calcTotalPrice(Request $request) {
-		$totalprice ='';
-		$shoppingcart = $request->session()->get("shoppingcart");
-		if ($shoppingcart === null) {
-			return 0;
-		}
-		foreach ($shoppingcart as $product) {
-			$price = $product->getProductOnPosition(0)->article_price;
-			$amount = $product->getAmount();
-			$productsprice = $amount * $price;
-			$totalprice = ++$productsprice;
-		}
-		return $totalprice;
 	}
 
 	/**
@@ -52,51 +43,31 @@ class ShoppingcartController extends Controller {
 	}
 
 	/**
-	 * removes the product from the shoppincart session array
+	 * removes the product from the shopping cart session array
 	 * @param Request $request
 	 * @param type $itemid
 	 * @return type page
 	 */
 	public function deleteItem(Request $request, $itemid) {
-		$shoppingcart = $request->session()->get("shoppingcart");
-		for ($i = 0; $i < count($shoppingcart); $i++) {
-			$articleID = $shoppingcart[$i]->getProductOnPosition(0)->article_id;
-			if ($articleID == $itemid) {
-				if (count($shoppingcart) === 1) {
-					$shoppingcart = [];
-				} else {
-					array_splice($shoppingcart, $i, $i);
-				}
-				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
-			}
-		}
+		$shoppinCartModel = new ShoppingCart();
+		$shoppinCartModel->deleteItem($request, $itemid);
 		return back();
 	}
 
 	/**
-	 * checks the content of the session for duplicates and deletes the duplicates and adds the amount to the other to the amount of destroyed duplicates
-	 * @param type $request
-	 * @return type session
+	 * calls the empty cart function to empty the shopping cart
+	 * @param Request $request
+	 * @return type previous page
 	 */
-	public function checkForDuplicates($request) {
-		$shoppingcart = $request->session()->get("shoppingcart");
-		if (count($shoppingcart) > 1) {
-			for ($i = 0; $i < count($shoppingcart); $i++) {
-				$articleID1 = $shoppingcart[$i]->getProductOnPosition(0)->article_id;
-				for ($y = 1; $y < count($shoppingcart); $y++) {
-					$articleID2 = $shoppingcart[$y]->getProductOnPosition(0)->article_id;
-					if ($i !== $y) {
-						if ($articleID1 === $articleID2) {
-							$amount = $shoppingcart[$i]->getAmount();
-							$amount ++;
-							$shoppingcart[$i]->setAmount($amount);
-							array_splice($shoppingcart, $y, $y);
-							$request->session()->put(self::SHOPPINGCART, $shoppingcart);
-						}
-					}
-				}
-			}
-		}
+	public function removeAll(Request $request) {
+		$shoppinCartModel = new ShoppingCart();
+		$shoppinCartModel->emptyCart($request);
+		return back();
+	}
+
+	public function updateItem(Request $request) {
+		$shoppinCartModel = new ShoppingCart();
+		$shoppinCartModel->updateItemAmount($request);
 	}
 
 }

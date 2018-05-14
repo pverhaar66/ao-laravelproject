@@ -1,16 +1,13 @@
 <?php
-
 namespace App\Http\Article;
 
 /**
- * Description of Article
+ * Description of ShoppingCart
  *
- * @author peter
+ * @author Peter Verhaar
  */
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model{
-	
-	
+class Article extends Model {
 	
 }

@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * Description of ShoppingCart
+ *
+ * @author Peter Verhaar
+ */
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Client\Client;
 
 class RegisterController extends Controller {
 	/*
@@ -21,7 +22,7 @@ class RegisterController extends Controller {
 	 */
 
 use RegistersUsers;
-	use \App\Http\Client;
+	
 
 	/**
 	 * Where to redirect users after registration.
@@ -68,8 +69,9 @@ use RegistersUsers;
 		$this->saveClientInfo();
 	}
 
-	public function saveClientInfo(array $data) {
-		$client = new client();
+	public function saveClientInfo() {
+		$data = $_POST;
+		$client = new Client();
 		$client->create([
 		"client_name" => $data['name'],
 		"client_address" =>$data['client_address'],

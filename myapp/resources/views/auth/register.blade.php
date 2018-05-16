@@ -62,7 +62,7 @@
 						</div>
 						<p>=======================================================================</p>
 						<div class="form-group row">
-							<label for="client_address" class="col-md-4 col-form-label text-md-right">{{ __('client_address') }}</label>
+							<label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
 							<div class="col-md-6">
 								<input id="client_address" type="text" class="form-control" name="client_address" required>
@@ -70,7 +70,7 @@
 						</div>
 
 						<div class="form-group row">
-							<label for="client_zipcode" class="col-md-4 col-form-label text-md-right">{{ __('client_zipcode') }}</label>
+							<label for="zipcode" class="col-md-4 col-form-label text-md-right">{{ __('Zipcode') }}</label>
 
 							<div class="col-md-6">
 								<input id="client_zipcode" type="text" class="form-control" name="client_zipcode" required>
@@ -78,7 +78,7 @@
 						</div>
 
 						<div class="form-group row">
-							<label for="client_province_state" class="col-md-4 col-form-label text-md-right">{{ __('client_province_state') }}</label>
+							<label for="province/state" class="col-md-4 col-form-label text-md-right">{{ __('Province / State') }}</label>
 
 							<div class="col-md-6">
 								<input id="client_province_state" type="text" class="form-control" name="client_province_state" required>

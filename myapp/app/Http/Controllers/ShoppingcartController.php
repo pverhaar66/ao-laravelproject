@@ -13,7 +13,8 @@ use App\Http\ItemCreator;
 use App\Http\ShoppingCart\ShoppingCart;
 
 class ShoppingcartController extends Controller {
-
+	
+	
 	const SHOPPINGCART = 'shoppingcart';
 
 	/**
@@ -26,6 +27,7 @@ class ShoppingcartController extends Controller {
 		$shoppinCartModel->checkForDuplicates($request);
 		$total = $shoppinCartModel->calcTotalPrice($request);
 		$shoppingcart = $request->session()->get("shoppingcart");
+		
 		return view('shoppingcart', ['shoppingcart' => $shoppingcart, 'total' => $total]);
 	}
 
@@ -34,9 +36,10 @@ class ShoppingcartController extends Controller {
 	 * @param Request $request
 	 * @param type $articleID
 	 */
-	public function addToCart(Request $request, $articleID) {
-		$article = DB::table('articles')->where('article_id', $articleID)->get();
-		$item = new ItemCreator($article, 1);
+	public function addToCart(Request $request) {
+		$articleDetails = $_POST;
+		$article = DB::table('articles')->where('article_id', $articleDetails['article_id'])->get();
+		$item = new ItemCreator($article, $articleDetails['amount']);
 		$shoppingCart = new ShoppingCart();
 		$shoppingCart->addToCart($request, $item);
 		return back();
@@ -66,8 +69,10 @@ class ShoppingcartController extends Controller {
 	}
 
 	public function updateItem(Request $request) {
+		$article = $_POST;
 		$shoppinCartModel = new ShoppingCart();
-		$shoppinCartModel->updateItemAmount($request);
+		$shoppinCartModel->updateItemAmount($request, $article);
+		return back();
 	}
 
 }

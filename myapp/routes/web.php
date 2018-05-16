@@ -25,10 +25,10 @@ Route::get('/home/{catid}', 'HomeController@index')->name('home');
 Route::get('/home/article/{articleID}', 'ArticleController@index')->name('article');
 
 Route::get('/shoppingcart', 'ShoppingcartController@index')->name('shoppingcart');
-Route::get('/shoppingcart/add/{articleid}', 'ShoppingcartController@addToCart')->name('addtocart');
 Route::get('/shoppingcart/delete/{articleid}', 'ShoppingcartController@deleteItem')->name('deleteItem');
 Route::get('/shoppingcart/deletecart', 'ShoppingcartController@removeAll')->name('removeAll');
-Route::get('/shoppingcart/update/{articleid}', 'ShoppingcartController@updateItem')->name('UpdateItem');
+Route::post('/shoppingcart/update', 'ShoppingcartController@updateItem')->name('UpdateItem');
+Route::post('shoppingcart/add', 'ShoppingcartController@addToCart')->name('addtocart');
 
 Route::get('/order/confirmation', 'OrderController@confirmation')->name('order');
 Route::get('/order/index', 'OrderController@index')->name('orderindex');

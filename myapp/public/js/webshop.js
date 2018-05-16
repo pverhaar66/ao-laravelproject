@@ -15,7 +15,6 @@ function showAlert(msg, duration) {
 }
 
 function currentAmountValue(){
-	return amount.value();
 }
 
 

@@ -11,15 +11,17 @@ use Illuminate\Http\Request;
 use App\Http\Order\Order;
 use App\Http\Order\OrderDetail;
 use App\Http\Article\Article;
+use App\Http\Client\Client;
 
 class OrderController extends Controller {
 
 	public function index() {
 		$orders = Order::where('client_id', auth()->user()->id)->get();
+		$client = Client::where('client_id', auth()->user()->id)->first();
 		$orderdetails = OrderDetail::get();
 		$articles = Article::get();
 
-		return view("orderlist", ["orderdetails" => $orderdetails, "orders" => $orders, "articles" => $articles]);
+		return view("orderlist", ["orderdetails" => $orderdetails, "orders" => $orders, "articles" => $articles, "client"=>$client]);
 	}
 
 	public function confirmation(Request $request) {
@@ -38,6 +40,7 @@ class OrderController extends Controller {
 			    "amount" => $item->getAmount()
 			]);
 		}
+		$request->session()->forget('shoppingcart');
 	}
 
 }

@@ -22,6 +22,16 @@ class ShoppingCart {
 		return self::SHOPPINGCART;
 	}
 
+	public function updateItemAmount($request, $article) {
+		$shoppingcart = $request->session()->get(self::SHOPPINGCART);
+		foreach ($shoppingcart as $item) {
+			if ($item->getProductOnPosition(0)->article_id == $article['article_id']) {
+				$item->setAmount($article['amount']);
+				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
+			}
+		}
+	}
+
 	/**
 	 * calculates the total price of all the items in the shopping cart
 	 * @param type $request
@@ -57,11 +67,12 @@ class ShoppingCart {
 				if (count($shoppingcart) === 1) {
 					$shoppingcart = null;
 				} else {
-					array_splice($shoppingcart, $i, $i);
+					array_splice($shoppingcart, $i, 1);
 				}
 				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
 			}
 		}
+
 		return back();
 	}
 
@@ -92,7 +103,7 @@ class ShoppingCart {
 							$amount = $shoppingcart[$i]->getAmount();
 							$amount ++;
 							$shoppingcart[$i]->setAmount($amount);
-							array_splice($shoppingcart, $y, $y);
+							array_splice($shoppingcart, $y, 1);
 							$request->session()->put(self::SHOPPINGCART, $shoppingcart);
 						}
 					}

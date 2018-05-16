@@ -22,7 +22,6 @@ class RegisterController extends Controller {
 	 */
 
 use RegistersUsers;
-	
 
 	/**
 	 * Where to redirect users after registration.
@@ -61,22 +60,24 @@ use RegistersUsers;
 	 * @return \App\User
 	 */
 	protected function create(array $data) {
-		User::create([
-				'name' => $data['name'],
-				'email' => $data['email'],
-				'password' => Hash::make($data['password']),
+		$user = User::create([
+		    'name' => $data['name'],
+		    'email' => $data['email'],
+		    'password' => Hash::make($data['password']),
 		]);
-		$this->saveClientInfo();
+		$this->saveClientInfo($data, $user);
+		
+		return $user;
 	}
 
-	public function saveClientInfo() {
-		$data = $_POST;
-		$client = new Client();
-		$client->create([
-		"client_name" => $data['name'],
-		"client_address" =>$data['client_address'],
-		"client_zipcode" => $data['client_zipcode'],
-		"client_province_state" =>$data['client_province_state']
+	public function saveClientInfo($data, $user) {
+		
+		Client::create([
+		    "user_id"=>$user->id,
+		    "client_name" => $data['name'],
+		    "client_address" => $data['client_address'],
+		    "client_zipcode" => $data['client_zipcode'],
+		    "client_province_state" => $data['client_province_state']
 		]);
 	}
 

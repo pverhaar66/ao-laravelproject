@@ -16,8 +16,8 @@ use App\Http\Client\Client;
 class OrderController extends Controller {
 
 	public function index() {
-		$orders = Order::where('client_id', auth()->user()->id)->get();
-		$client = Client::where('client_id', auth()->user()->id)->first();
+		$client = Client::where('user_id', auth()->user()->id)->first();
+		$orders = Order::where('client_id', $client->client_id)->get();
 		$orderdetails = OrderDetail::get();
 		$articles = Article::get();
 
@@ -31,7 +31,8 @@ class OrderController extends Controller {
 
 	public function save($request) {
 		$order = new Order();
-		$order->client_id = auth()->user()->id;
+		$client = Client::where('user_id', auth()->user()->id)->first();
+		$order->client_id = $client->client_id;
 		$order->save();
 		$shoppingcart = $request->session()->get("shoppingcart");
 		foreach ($shoppingcart as $item) {

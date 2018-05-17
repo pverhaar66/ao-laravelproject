@@ -7,8 +7,8 @@ namespace App\Http\Controllers;
  *
  * @author Peter Verhaar
  */
-use Illuminate\Support\Facades\DB;
 use App\Http\Article\Article;
+use App\Http\Category\Category;
 
 class ArticleController {
 
@@ -17,7 +17,8 @@ class ArticleController {
 	 */
 	public function index($articleID) {
 		$article = Article::where('article_id', $articleID)->first();
+		$categories = Category::get();
 		
-		return view('article', ["article" =>$article]);
+		return view('article', ["article" =>$article, "categories"=>$categories]);
 	}
 }

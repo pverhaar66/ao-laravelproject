@@ -9,6 +9,8 @@ namespace App\Http\Controllers;
  */
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Category\Category;
+use App\Http\Article\Article;
 
 class HomeController extends Controller {
 
@@ -27,13 +29,13 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index($catid = null) {
-		$categories = DB::table('categories')->get();
+		$categories = Category::get();
 		if ($catid === null) {
 			$articles = "Welcome To My Shop";
 		} else {
 			$articleIDs = DB::table("linked_articles_categories")->select("article_id")->where("category_id", $catid)->get();
 			foreach ($articleIDs as $articleID) {
-				$articles[] = DB::table("articles")->where("article_id", $articleID->article_id)->get();
+				$articles[] = Article::where("article_id", $articleID->article_id)->get();
 			}
 		}
 		return view('home', ['articles' => $articles, 'categories' => $categories]);

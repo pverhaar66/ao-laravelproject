@@ -3,7 +3,7 @@
 
 <section id='mainsquare'>	
 	
-	<a href="{{url('/home/')  }}"><button>Back</button></a>
+	<a href="{{url('/home/')  }}"><button>Home</button></a>
 	
 	@foreach($orders as $order)
 	<section id="orderlist">

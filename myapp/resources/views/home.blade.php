@@ -19,7 +19,7 @@
 	@endforeach
 
 	@else
-	{!!$articles!!}
+	<h1>{!!$articles!!}</h1>
 </pre>	
 @endif	
 

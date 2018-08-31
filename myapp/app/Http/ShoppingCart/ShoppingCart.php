@@ -10,6 +10,8 @@ namespace App\Http\ShoppingCart;
 class ShoppingCart {
 
 	const SHOPPINGCART = 'shoppingcart';
+	
+	var $items = [];
 
 	/**
 	 * adds the product to items array and the items array to the shopping cart session
@@ -101,7 +103,7 @@ class ShoppingCart {
 					if ($i !== $y) {
 						if ($articleID1 === $articleID2) {
 							$amount = $shoppingcart[$i]->getAmount();
-							$amount ++;
+							$amount += $shoppingcart[$y]->getAmount();
 							$shoppingcart[$i]->setAmount($amount);
 							array_splice($shoppingcart, $y, 1);
 							$request->session()->put(self::SHOPPINGCART, $shoppingcart);

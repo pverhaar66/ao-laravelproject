@@ -24,7 +24,7 @@ class ShoppingcartController extends Controller {
 	 */
 	public function index(Request $request) {
 		$shoppinCartModel = new ShoppingCart();
-		$shoppinCartModel->checkForDuplicates($request);
+		
 		$total = $shoppinCartModel->calcTotalPrice($request);
 		$shoppingcart = $request->session()->get("shoppingcart");
 		
@@ -42,6 +42,7 @@ class ShoppingcartController extends Controller {
 		$item = new ItemCreator($article, $articleDetails['amount']);
 		$shoppingCart = new ShoppingCart();
 		$shoppingCart->addToCart($request, $item);
+		$shoppingCart->checkForDuplicates($request);
 		return back();
 	}
 

@@ -9,10 +9,15 @@ namespace App\Http\ShoppingCart;
  */
 class ShoppingCart {
 
-	const SHOPPINGCART = 'shoppingcart';
+	const SC = 'shoppingcart';
 	
-	var $items = [];
-
+	/**
+	 * 
+	 */
+	function getShoppingCart($request){
+		return $request->session()->get(self::SC);
+	}
+	
 	/**
 	 * adds the product to items array and the items array to the shopping cart session
 	 * @param type $request
@@ -20,16 +25,17 @@ class ShoppingCart {
 	 * @return type ShoppingcartSession
 	 */
 	function addToCart($request, $product) {
-		$request->session()->push(self::SHOPPINGCART, $product);
-		return self::SHOPPINGCART;
+		$request->session()->push(self::SC, $product);
+		$this->checkForDuplicates($request);
+		return self::SC;
 	}
 
 	public function updateItemAmount($request, $article) {
-		$shoppingcart = $request->session()->get(self::SHOPPINGCART);
+		$shoppingcart = $request->session()->get(self::SC);
 		foreach ($shoppingcart as $item) {
 			if ($item->getProductOnPosition(0)->article_id == $article['article_id']) {
 				$item->setAmount($article['amount']);
-				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
+				$request->session()->put(self::SC, $shoppingcart);
 			}
 		}
 	}
@@ -71,7 +77,7 @@ class ShoppingCart {
 				} else {
 					array_splice($shoppingcart, $i, 1);
 				}
-				$request->session()->put(self::SHOPPINGCART, $shoppingcart);
+				$request->session()->put(self::SC, $shoppingcart);
 			}
 		}
 
@@ -84,7 +90,7 @@ class ShoppingCart {
 	 * @return type previous page
 	 */
 	public function emptyCart($request) {
-		$request->session()->forget(self::SHOPPINGCART);
+		$request->session()->forget(self::SC);
 		return back();
 	}
 
@@ -106,7 +112,7 @@ class ShoppingCart {
 							$amount += $shoppingcart[$y]->getAmount();
 							$shoppingcart[$i]->setAmount($amount);
 							array_splice($shoppingcart, $y, 1);
-							$request->session()->put(self::SHOPPINGCART, $shoppingcart);
+							$request->session()->put(self::SC, $shoppingcart);
 						}
 					}
 				}

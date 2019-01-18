@@ -14,7 +14,7 @@ class Orderdetails extends Migration {
 	public function up() {
 		Schema::create('orderdetails', function (Blueprint $table) {
 			$table->increments('orderdetails_id');
-			$table->int('order_id');
+			$table->integer('order_id');
 			$table->integer('article_id');
 			$table->integer('amount');
 			$table->timestamps();

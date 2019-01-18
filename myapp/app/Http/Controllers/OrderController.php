@@ -35,13 +35,20 @@ class OrderController extends Controller {
 		$order->client_id = $client->client_id;
 		$order->save();
 		$shoppingcart = $request->session()->get("shoppingcart");
+	
 		foreach ($shoppingcart as $item) {
 			$order->orderdetails()->create([
 			    "article_id" => $item->getProductOnPosition(0)->article_id,
-			    "amount" => $item->getAmount()
+			    "amount" => $item->getAmount(),
 			]);
 		}
 		$request->session()->forget('shoppingcart');
 	}
-
+	
+	public function comfirmArrival($orderID){
+		$order = Order::where('id', $orderID)->first();
+		$order->updateOrder(); 
+		
+		return redirect()->route('orderindex');
+	}
 }

@@ -13,8 +13,9 @@ class Orders extends Migration {
 	 */
 	public function up() {
 		Schema::create('orders', function (Blueprint $table) {
-			$table->increments('order_id');
+			$table->increments('id');
 			$table->integer('client_id');
+			$table->enum('status', ['ordered', 'arrived'])->default('ordered');
 			$table->timestamps();
 		});
 	}

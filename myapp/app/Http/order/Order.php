@@ -10,7 +10,18 @@ namespace App\Http\Order;
 
 class Order extends \Illuminate\Database\Eloquent\Model{
 		
+	protected $fillable = ['status',];
+	
 	public function orderdetails(){
 		return $this->hasMany("App\Http\Order\OrderDetail");
+	}
+	
+	
+	
+	public function updateOrder(){
+		$this->fill([
+		    "status" => 'arrived'
+		]);
+		return $this->save();
 	}
 }

@@ -32,3 +32,4 @@ Route::post('shoppingcart/add', 'ShoppingcartController@addToCart')->name('addto
 
 Route::get('/order/confirmation', 'OrderController@confirmation')->name('order');
 Route::get('/order/index', 'OrderController@index')->name('orderindex');
+Route::get('/order/comfirm/arrival/{orderID}', 'OrderController@comfirmArrival')->name('orderComfirmArrival');
